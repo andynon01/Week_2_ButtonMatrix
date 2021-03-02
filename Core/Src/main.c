@@ -134,7 +134,7 @@ int main(void)
 			if (ButtonMatrixState == 32768) // Login
 			{
 				CountRound -= 1;
-				if (InputCheck[0] == 6
+				if (   InputCheck[0] == 6
 					&& InputCheck[1] == 2
 					&& InputCheck[2] == 3
 					&& InputCheck[3] == 4
