@@ -51,7 +51,7 @@ uint32_t ButtonMatrixTimestamp = 0;
 
 uint16_t EnterNumber = 0;
 uint8_t CountRound = 0;
-uint16_t InputCheck[12] = {};
+uint16_t InputCheck[11] = {};
 uint32_t TimeStamp = 0;
 uint8_t Login = 0;
 uint8_t LED2 = 0;
@@ -130,8 +130,10 @@ int main(void)
 			else if (ButtonMatrixState == 4){EnterNumber = 9;} // 9
 			else if (ButtonMatrixState == 8){Login = 0; CountRound = -1;} // Clear
 
+
 			InputCheck[CountRound] = EnterNumber;
-			if (ButtonMatrixState == 32768) // Login
+			CountRound += 1;
+			if (ButtonMatrixState == 32768 && CountRound == 12) // Login
 			{
 				CountRound -= 1;
 				if (   InputCheck[0] == 6
@@ -150,8 +152,6 @@ int main(void)
 				}
 			}
 
-			CountRound += 1;
-			if (CountRound > 11){CountRound = 12;}
 			if (ButtonMatrixState == 2048){CountRound -= 1;} // Empty
 			else if (ButtonMatrixState == 8192){CountRound -= 1;} // Empty
 			else if (ButtonMatrixState == 16384){CountRound -= 1;} // Empty

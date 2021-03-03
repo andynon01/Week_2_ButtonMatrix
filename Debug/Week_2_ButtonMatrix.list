@@ -37,11 +37,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  16 .debug_macro  00014701  00000000  00000000  00027468  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00004fda  00000000  00000000  0003bb69  2**0
+ 17 .debug_line   00004fd9  00000000  00000000  0003bb69  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00080ec5  00000000  00000000  00040b43  2**0
+ 18 .debug_str    00080ec5  00000000  00000000  00040b42  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000c1a08  2**0
+ 19 .comment      0000007b  00000000  00000000  000c1a07  2**0
                   CONTENTS, READONLY
  20 .debug_frame  000016dc  00000000  00000000  000c1a84  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -511,6 +511,7 @@ int main(void)
  80005c4:	22ff      	movs	r2, #255	; 0xff
  80005c6:	701a      	strb	r2, [r3, #0]
 
+
 			InputCheck[CountRound] = EnterNumber;
  80005c8:	4b57      	ldr	r3, [pc, #348]	; (8000728 <main+0x250>)
  80005ca:	781b      	ldrb	r3, [r3, #0]
@@ -519,131 +520,130 @@ int main(void)
  80005d0:	8819      	ldrh	r1, [r3, #0]
  80005d2:	4b56      	ldr	r3, [pc, #344]	; (800072c <main+0x254>)
  80005d4:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
-			if (ButtonMatrixState == 32768) // Login
- 80005d8:	4b4f      	ldr	r3, [pc, #316]	; (8000718 <main+0x240>)
- 80005da:	881b      	ldrh	r3, [r3, #0]
- 80005dc:	f5b3 4f00 	cmp.w	r3, #32768	; 0x8000
- 80005e0:	d134      	bne.n	800064c <main+0x174>
+			CountRound += 1;
+ 80005d8:	4b53      	ldr	r3, [pc, #332]	; (8000728 <main+0x250>)
+ 80005da:	781b      	ldrb	r3, [r3, #0]
+ 80005dc:	3301      	adds	r3, #1
+ 80005de:	b2da      	uxtb	r2, r3
+ 80005e0:	4b51      	ldr	r3, [pc, #324]	; (8000728 <main+0x250>)
+ 80005e2:	701a      	strb	r2, [r3, #0]
+			if (ButtonMatrixState == 32768 && CountRound == 12) // Login
+ 80005e4:	4b4c      	ldr	r3, [pc, #304]	; (8000718 <main+0x240>)
+ 80005e6:	881b      	ldrh	r3, [r3, #0]
+ 80005e8:	f5b3 4f00 	cmp.w	r3, #32768	; 0x8000
+ 80005ec:	d138      	bne.n	8000660 <main+0x188>
+ 80005ee:	4b4e      	ldr	r3, [pc, #312]	; (8000728 <main+0x250>)
+ 80005f0:	781b      	ldrb	r3, [r3, #0]
+ 80005f2:	2b0c      	cmp	r3, #12
+ 80005f4:	d134      	bne.n	8000660 <main+0x188>
 			{
 				CountRound -= 1;
- 80005e2:	4b51      	ldr	r3, [pc, #324]	; (8000728 <main+0x250>)
- 80005e4:	781b      	ldrb	r3, [r3, #0]
- 80005e6:	3b01      	subs	r3, #1
- 80005e8:	b2da      	uxtb	r2, r3
- 80005ea:	4b4f      	ldr	r3, [pc, #316]	; (8000728 <main+0x250>)
- 80005ec:	701a      	strb	r2, [r3, #0]
-				if (InputCheck[0] == 6
- 80005ee:	4b4f      	ldr	r3, [pc, #316]	; (800072c <main+0x254>)
- 80005f0:	881b      	ldrh	r3, [r3, #0]
- 80005f2:	2b06      	cmp	r3, #6
- 80005f4:	d12a      	bne.n	800064c <main+0x174>
+ 80005f6:	4b4c      	ldr	r3, [pc, #304]	; (8000728 <main+0x250>)
+ 80005f8:	781b      	ldrb	r3, [r3, #0]
+ 80005fa:	3b01      	subs	r3, #1
+ 80005fc:	b2da      	uxtb	r2, r3
+ 80005fe:	4b4a      	ldr	r3, [pc, #296]	; (8000728 <main+0x250>)
+ 8000600:	701a      	strb	r2, [r3, #0]
+				if (   InputCheck[0] == 6
+ 8000602:	4b4a      	ldr	r3, [pc, #296]	; (800072c <main+0x254>)
+ 8000604:	881b      	ldrh	r3, [r3, #0]
+ 8000606:	2b06      	cmp	r3, #6
+ 8000608:	d12a      	bne.n	8000660 <main+0x188>
 					&& InputCheck[1] == 2
- 80005f6:	4b4d      	ldr	r3, [pc, #308]	; (800072c <main+0x254>)
- 80005f8:	885b      	ldrh	r3, [r3, #2]
- 80005fa:	2b02      	cmp	r3, #2
- 80005fc:	d126      	bne.n	800064c <main+0x174>
+ 800060a:	4b48      	ldr	r3, [pc, #288]	; (800072c <main+0x254>)
+ 800060c:	885b      	ldrh	r3, [r3, #2]
+ 800060e:	2b02      	cmp	r3, #2
+ 8000610:	d126      	bne.n	8000660 <main+0x188>
 					&& InputCheck[2] == 3
- 80005fe:	4b4b      	ldr	r3, [pc, #300]	; (800072c <main+0x254>)
- 8000600:	889b      	ldrh	r3, [r3, #4]
- 8000602:	2b03      	cmp	r3, #3
- 8000604:	d122      	bne.n	800064c <main+0x174>
+ 8000612:	4b46      	ldr	r3, [pc, #280]	; (800072c <main+0x254>)
+ 8000614:	889b      	ldrh	r3, [r3, #4]
+ 8000616:	2b03      	cmp	r3, #3
+ 8000618:	d122      	bne.n	8000660 <main+0x188>
 					&& InputCheck[3] == 4
- 8000606:	4b49      	ldr	r3, [pc, #292]	; (800072c <main+0x254>)
- 8000608:	88db      	ldrh	r3, [r3, #6]
- 800060a:	2b04      	cmp	r3, #4
- 800060c:	d11e      	bne.n	800064c <main+0x174>
+ 800061a:	4b44      	ldr	r3, [pc, #272]	; (800072c <main+0x254>)
+ 800061c:	88db      	ldrh	r3, [r3, #6]
+ 800061e:	2b04      	cmp	r3, #4
+ 8000620:	d11e      	bne.n	8000660 <main+0x188>
 					&& InputCheck[4] == 0
- 800060e:	4b47      	ldr	r3, [pc, #284]	; (800072c <main+0x254>)
- 8000610:	891b      	ldrh	r3, [r3, #8]
- 8000612:	2b00      	cmp	r3, #0
- 8000614:	d11a      	bne.n	800064c <main+0x174>
+ 8000622:	4b42      	ldr	r3, [pc, #264]	; (800072c <main+0x254>)
+ 8000624:	891b      	ldrh	r3, [r3, #8]
+ 8000626:	2b00      	cmp	r3, #0
+ 8000628:	d11a      	bne.n	8000660 <main+0x188>
 					&& InputCheck[5] == 5
- 8000616:	4b45      	ldr	r3, [pc, #276]	; (800072c <main+0x254>)
- 8000618:	895b      	ldrh	r3, [r3, #10]
- 800061a:	2b05      	cmp	r3, #5
- 800061c:	d116      	bne.n	800064c <main+0x174>
+ 800062a:	4b40      	ldr	r3, [pc, #256]	; (800072c <main+0x254>)
+ 800062c:	895b      	ldrh	r3, [r3, #10]
+ 800062e:	2b05      	cmp	r3, #5
+ 8000630:	d116      	bne.n	8000660 <main+0x188>
 					&& InputCheck[6] == 0
- 800061e:	4b43      	ldr	r3, [pc, #268]	; (800072c <main+0x254>)
- 8000620:	899b      	ldrh	r3, [r3, #12]
- 8000622:	2b00      	cmp	r3, #0
- 8000624:	d112      	bne.n	800064c <main+0x174>
+ 8000632:	4b3e      	ldr	r3, [pc, #248]	; (800072c <main+0x254>)
+ 8000634:	899b      	ldrh	r3, [r3, #12]
+ 8000636:	2b00      	cmp	r3, #0
+ 8000638:	d112      	bne.n	8000660 <main+0x188>
 					&& InputCheck[7] == 0
- 8000626:	4b41      	ldr	r3, [pc, #260]	; (800072c <main+0x254>)
- 8000628:	89db      	ldrh	r3, [r3, #14]
- 800062a:	2b00      	cmp	r3, #0
- 800062c:	d10e      	bne.n	800064c <main+0x174>
+ 800063a:	4b3c      	ldr	r3, [pc, #240]	; (800072c <main+0x254>)
+ 800063c:	89db      	ldrh	r3, [r3, #14]
+ 800063e:	2b00      	cmp	r3, #0
+ 8000640:	d10e      	bne.n	8000660 <main+0x188>
 					&& InputCheck[8] == 0
- 800062e:	4b3f      	ldr	r3, [pc, #252]	; (800072c <main+0x254>)
- 8000630:	8a1b      	ldrh	r3, [r3, #16]
- 8000632:	2b00      	cmp	r3, #0
- 8000634:	d10a      	bne.n	800064c <main+0x174>
+ 8000642:	4b3a      	ldr	r3, [pc, #232]	; (800072c <main+0x254>)
+ 8000644:	8a1b      	ldrh	r3, [r3, #16]
+ 8000646:	2b00      	cmp	r3, #0
+ 8000648:	d10a      	bne.n	8000660 <main+0x188>
 					&& InputCheck[9] == 6
- 8000636:	4b3d      	ldr	r3, [pc, #244]	; (800072c <main+0x254>)
- 8000638:	8a5b      	ldrh	r3, [r3, #18]
- 800063a:	2b06      	cmp	r3, #6
- 800063c:	d106      	bne.n	800064c <main+0x174>
+ 800064a:	4b38      	ldr	r3, [pc, #224]	; (800072c <main+0x254>)
+ 800064c:	8a5b      	ldrh	r3, [r3, #18]
+ 800064e:	2b06      	cmp	r3, #6
+ 8000650:	d106      	bne.n	8000660 <main+0x188>
 					&& InputCheck[10] == 1)
- 800063e:	4b3b      	ldr	r3, [pc, #236]	; (800072c <main+0x254>)
- 8000640:	8a9b      	ldrh	r3, [r3, #20]
- 8000642:	2b01      	cmp	r3, #1
- 8000644:	d102      	bne.n	800064c <main+0x174>
+ 8000652:	4b36      	ldr	r3, [pc, #216]	; (800072c <main+0x254>)
+ 8000654:	8a9b      	ldrh	r3, [r3, #20]
+ 8000656:	2b01      	cmp	r3, #1
+ 8000658:	d102      	bne.n	8000660 <main+0x188>
 				{
 					Login = 1;
- 8000646:	4b37      	ldr	r3, [pc, #220]	; (8000724 <main+0x24c>)
- 8000648:	2201      	movs	r2, #1
- 800064a:	701a      	strb	r2, [r3, #0]
+ 800065a:	4b32      	ldr	r3, [pc, #200]	; (8000724 <main+0x24c>)
+ 800065c:	2201      	movs	r2, #1
+ 800065e:	701a      	strb	r2, [r3, #0]
 				}
 			}
 
-			CountRound += 1;
- 800064c:	4b36      	ldr	r3, [pc, #216]	; (8000728 <main+0x250>)
- 800064e:	781b      	ldrb	r3, [r3, #0]
- 8000650:	3301      	adds	r3, #1
- 8000652:	b2da      	uxtb	r2, r3
- 8000654:	4b34      	ldr	r3, [pc, #208]	; (8000728 <main+0x250>)
- 8000656:	701a      	strb	r2, [r3, #0]
-			if (CountRound > 11){CountRound = 12;}
- 8000658:	4b33      	ldr	r3, [pc, #204]	; (8000728 <main+0x250>)
- 800065a:	781b      	ldrb	r3, [r3, #0]
- 800065c:	2b0b      	cmp	r3, #11
- 800065e:	d902      	bls.n	8000666 <main+0x18e>
- 8000660:	4b31      	ldr	r3, [pc, #196]	; (8000728 <main+0x250>)
- 8000662:	220c      	movs	r2, #12
- 8000664:	701a      	strb	r2, [r3, #0]
 			if (ButtonMatrixState == 2048){CountRound -= 1;} // Empty
- 8000666:	4b2c      	ldr	r3, [pc, #176]	; (8000718 <main+0x240>)
- 8000668:	881b      	ldrh	r3, [r3, #0]
- 800066a:	f5b3 6f00 	cmp.w	r3, #2048	; 0x800
- 800066e:	d105      	bne.n	800067c <main+0x1a4>
- 8000670:	4b2d      	ldr	r3, [pc, #180]	; (8000728 <main+0x250>)
- 8000672:	781b      	ldrb	r3, [r3, #0]
- 8000674:	3b01      	subs	r3, #1
- 8000676:	b2da      	uxtb	r2, r3
- 8000678:	4b2b      	ldr	r3, [pc, #172]	; (8000728 <main+0x250>)
- 800067a:	701a      	strb	r2, [r3, #0]
-			if (ButtonMatrixState == 8192){CountRound -= 1;} // Empty
- 800067c:	4b26      	ldr	r3, [pc, #152]	; (8000718 <main+0x240>)
- 800067e:	881b      	ldrh	r3, [r3, #0]
- 8000680:	f5b3 5f00 	cmp.w	r3, #8192	; 0x2000
- 8000684:	d105      	bne.n	8000692 <main+0x1ba>
- 8000686:	4b28      	ldr	r3, [pc, #160]	; (8000728 <main+0x250>)
- 8000688:	781b      	ldrb	r3, [r3, #0]
- 800068a:	3b01      	subs	r3, #1
- 800068c:	b2da      	uxtb	r2, r3
- 800068e:	4b26      	ldr	r3, [pc, #152]	; (8000728 <main+0x250>)
- 8000690:	701a      	strb	r2, [r3, #0]
-			if (ButtonMatrixState == 16384){CountRound -= 1;} // Empty
- 8000692:	4b21      	ldr	r3, [pc, #132]	; (8000718 <main+0x240>)
- 8000694:	881b      	ldrh	r3, [r3, #0]
- 8000696:	f5b3 4f80 	cmp.w	r3, #16384	; 0x4000
- 800069a:	d105      	bne.n	80006a8 <main+0x1d0>
- 800069c:	4b22      	ldr	r3, [pc, #136]	; (8000728 <main+0x250>)
- 800069e:	781b      	ldrb	r3, [r3, #0]
- 80006a0:	3b01      	subs	r3, #1
- 80006a2:	b2da      	uxtb	r2, r3
- 80006a4:	4b20      	ldr	r3, [pc, #128]	; (8000728 <main+0x250>)
- 80006a6:	701a      	strb	r2, [r3, #0]
-			if (ButtonMatrixState == 128){CountRound -= 1;} // Empty
+ 8000660:	4b2d      	ldr	r3, [pc, #180]	; (8000718 <main+0x240>)
+ 8000662:	881b      	ldrh	r3, [r3, #0]
+ 8000664:	f5b3 6f00 	cmp.w	r3, #2048	; 0x800
+ 8000668:	d106      	bne.n	8000678 <main+0x1a0>
+ 800066a:	4b2f      	ldr	r3, [pc, #188]	; (8000728 <main+0x250>)
+ 800066c:	781b      	ldrb	r3, [r3, #0]
+ 800066e:	3b01      	subs	r3, #1
+ 8000670:	b2da      	uxtb	r2, r3
+ 8000672:	4b2d      	ldr	r3, [pc, #180]	; (8000728 <main+0x250>)
+ 8000674:	701a      	strb	r2, [r3, #0]
+ 8000676:	e021      	b.n	80006bc <main+0x1e4>
+			else if (ButtonMatrixState == 8192){CountRound -= 1;} // Empty
+ 8000678:	4b27      	ldr	r3, [pc, #156]	; (8000718 <main+0x240>)
+ 800067a:	881b      	ldrh	r3, [r3, #0]
+ 800067c:	f5b3 5f00 	cmp.w	r3, #8192	; 0x2000
+ 8000680:	d106      	bne.n	8000690 <main+0x1b8>
+ 8000682:	4b29      	ldr	r3, [pc, #164]	; (8000728 <main+0x250>)
+ 8000684:	781b      	ldrb	r3, [r3, #0]
+ 8000686:	3b01      	subs	r3, #1
+ 8000688:	b2da      	uxtb	r2, r3
+ 800068a:	4b27      	ldr	r3, [pc, #156]	; (8000728 <main+0x250>)
+ 800068c:	701a      	strb	r2, [r3, #0]
+ 800068e:	e015      	b.n	80006bc <main+0x1e4>
+			else if (ButtonMatrixState == 16384){CountRound -= 1;} // Empty
+ 8000690:	4b21      	ldr	r3, [pc, #132]	; (8000718 <main+0x240>)
+ 8000692:	881b      	ldrh	r3, [r3, #0]
+ 8000694:	f5b3 4f80 	cmp.w	r3, #16384	; 0x4000
+ 8000698:	d106      	bne.n	80006a8 <main+0x1d0>
+ 800069a:	4b23      	ldr	r3, [pc, #140]	; (8000728 <main+0x250>)
+ 800069c:	781b      	ldrb	r3, [r3, #0]
+ 800069e:	3b01      	subs	r3, #1
+ 80006a0:	b2da      	uxtb	r2, r3
+ 80006a2:	4b21      	ldr	r3, [pc, #132]	; (8000728 <main+0x250>)
+ 80006a4:	701a      	strb	r2, [r3, #0]
+ 80006a6:	e009      	b.n	80006bc <main+0x1e4>
+			else if (ButtonMatrixState == 128){CountRound -= 1;} // Empty
  80006a8:	4b1b      	ldr	r3, [pc, #108]	; (8000718 <main+0x240>)
  80006aa:	881b      	ldrh	r3, [r3, #0]
  80006ac:	2b80      	cmp	r3, #128	; 0x80
